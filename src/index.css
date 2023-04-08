@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,200;1,300;1,700&family=Roboto:ital,wght@0,300;0,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,200;1,300;1,700&family=Roboto:ital,wght@0,300;0,400;1,500&display=swap');
+select:hover {
+    opacity: 0.8;
+}
+
+select option {
+    text-align: center;
+}
+
+select option:hover {
+    background-color: #f3f3f3;
+}
+
+body {
+    background: linear-gradient(to bottom right, #0c2d4d, #154d9b, #0c2d4d);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+
+.weather-chart {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+
+.weather-chart h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.weather-chart p {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.weather-chart canvas {
+    margin: 2rem 0;
+}
+
