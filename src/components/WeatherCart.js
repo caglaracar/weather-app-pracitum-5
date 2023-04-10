@@ -50,69 +50,28 @@ function WeatherChart() {
             return <p>Loading...</p>;
         }
 
-        const labels = forecast.list.map((item) => item.dt_txt);
-        const temperatures = forecast.list.map((item) => item.main.temp);
-
-        const lowest = Math.floor(lowestTemp(forecast.list));
-        const highest = Math.ceil(highestTemp(forecast.list));
-        const sequentialNumbers = getSequentialNumbers(lowest, highest);
+        const labels = forecast.list
+            .slice(0, 8)
+            .map((item) => item.dt_txt.substring(11, 16));
+        const temperatures = forecast.list
+            .slice(0, 8)
+            .map((item) => fixedFormat(item.main.temp));
 
         const data = {
             labels,
             datasets: [
                 {
                     label: "Temperature",
-                    data: temperatures.map((temp) => fixedFormat(temp)),
+                    data: temperatures,
                     fill: false,
                     backgroundColor: "rgba(75,192,192,0.4)",
                     borderColor: "rgba(75,192,192,1)",
                     borderWidth: 1,
+                    pointRadius: 0,
+                    pointHitRadius: 10,
                 },
             ],
         };
-
-        // const options = {
-        //     scales: {
-        //         y: {
-        //             ticks: {
-        //                 beginAtZero: true,
-        //                 suggestedMax: 30, // maksimum değeri 30 olarak belirle
-        //                 stepSize: 5, // aralıkların büyüklüğü 5 olsun
-        //                 callback: (value) => {
-        //                     if (typeof value === "string") {
-        //                         return value.substring(11, 16);
-        //                     }
-        //                     return value;
-        //                 },
-        //             },
-        //         },
-        //         x: {
-        //             ticks: {
-        //                 callback: (value) => {
-        //                     if (typeof value === "string") {
-        //                         return value.substring(11, 16);
-        //                     }
-        //                     return value;
-        //                 },
-        //             },
-        //         },
-        //     },
-        //     plugins: {
-        //         legend: {
-        //             display: true,
-        //             position: "top",
-        //             labels: {
-        //                 fontColor: "#333",
-        //                 fontSize: 16,
-        //             },
-        //         },
-        //         title: {
-        //             display: true,
-        //             text: "Temperature Chart",
-        //             fontSize: 20,
-        //         },
-        //     },
-        // };
 
         const options = {
             scales: {
@@ -121,22 +80,11 @@ function WeatherChart() {
                         beginAtZero: true,
                         suggestedMax: 30,
                         stepSize: 5,
-                        callback: (value) => {
-                            if (typeof value === "string") {
-                                return value.substring(11, 16);
-                            }
-                            return value;
-                        },
                     },
                 },
                 x: {
                     ticks: {
-                        callback: (value) => {
-                            if (typeof value === "string") {
-                                return value.substring(11, 16);
-                            }
-                            return value;
-                        },
+                        stepSize: 2,
                     },
                 },
             },
@@ -162,24 +110,20 @@ function WeatherChart() {
             }
         };
 
-
-
-
-        return <Line  data={data} options={options}/>;
+        return <Line data={data} options={options} />;
     };
 
     return (
         <div className="weather-chart">
             {isLoading ? (
-                <UilSpinnerAlt/>
+                <UilSpinnerAlt />
             ) : !forecast || forecast.length === 0 ? (
-                <UilSpinnerAlt/>
+                <p>No data available</p>
             ) : (
                 <div>{renderChart()}</div>
             )}
         </div>
     );
-
 }
 
 export default WeatherChart;

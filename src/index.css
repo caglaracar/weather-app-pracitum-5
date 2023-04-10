@@ -33,7 +33,7 @@ body {
     padding: 2rem;
     background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    border-radius: 1rem;
 }
 
 
@@ -51,4 +51,19 @@ body {
 .weather-chart canvas {
     margin: 2rem 0;
 }
+
+@media (max-width: 640px) {
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .max-w-screen-2xl {
+        max-width: 100%;
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 
