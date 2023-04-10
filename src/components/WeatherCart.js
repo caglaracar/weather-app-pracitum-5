@@ -61,14 +61,16 @@ function WeatherChart() {
             labels,
             datasets: [
                 {
-                    label: "Temperature",
+                    label: "°C",
                     data: temperatures,
                     fill: false,
                     backgroundColor: "rgba(75,192,192,0.4)",
                     borderColor: "rgba(75,192,192,1)",
-                    borderWidth: 1,
+                    borderWidth: 3,
                     pointRadius: 0,
                     pointHitRadius: 10,
+                    hoverBackgroundColor: "rgba(75,192,192,0.8)",
+                    hoverBorderColor: "rgba(75,192,192,1)"
                 },
             ],
         };
@@ -81,13 +83,29 @@ function WeatherChart() {
                         suggestedMax: 30,
                         stepSize: 5,
                     },
+                    title: {
+                        display: true,
+                        text: "Sıcaklık (°C)",
+                        color: "#666666",
+                        font: {
+                            size: 16,
+                            weight: "bold"
+                        }
+                    },
+                    grid: {
+                        color: "rgba(0, 0, 0, 0.1)"
+                    }
                 },
                 x: {
                     ticks: {
                         stepSize: 2,
                     },
+                    grid: {
+                        display: false
+                    }
                 },
             },
+
             plugins: {
                 legend: {
                     display: true,
@@ -99,13 +117,19 @@ function WeatherChart() {
                 },
                 title: {
                     display: true,
-                    text: "Temperature Chart",
+                    text: "Günlük Hava Durumu Grafiği",
                     fontSize: 20,
                 },
             },
             elements: {
                 line: {
                     tension: 0.5
+                }, point: {
+                    hitRadius: 10,
+                    hoverRadius: 5,
+                    hoverBorderWidth: 2,
+                    radius: 5,
+                    pointStyle: 'circle'
                 }
             }
         };
