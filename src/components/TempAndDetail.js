@@ -10,10 +10,12 @@ import {
     UilSpinnerAlt
 } from "@iconscout/react-unicons";
 import {WeatherContext} from "../context/Context";
-const TempAndDetail = () => {
 
+const TempAndDetail = () => {
+// Component içinde kullanılacak state'ler
     const [isLoading, setIsLoading] = useState(true);
     const {forecast} = useContext(WeatherContext);
+
     useEffect(() => {
         setIsLoading(false)
     }, [forecast])
@@ -22,6 +24,9 @@ const TempAndDetail = () => {
     const {temp, feels_like, humidity} = main || {};
     const {speed: windSpeed} = wind || {};
     const iconUrl = weather ? `http://openweathermap.org/img/wn/${weather[0]?.icon}.png` : null;
+
+// Tarih bilgileri için fonksiyonlar
+
     const fixedFormatedSunrise = () => {
         const sunriseDate = new Date(forecast.city.sunrise * 1000);
         return {
@@ -36,6 +41,9 @@ const TempAndDetail = () => {
             sunriseMinutes: sunriseDate.getMinutes() < 10 ? "0" + sunriseDate.getMinutes() : sunriseDate.getMinutes()
         }
     }
+
+    // Fonksiyonlar aracılığı ile sıcaklık değerleri düzenleniyor
+
     const fixedFormat = (temp) => {
         return temp.toFixed() ? (temp - kelvin).toFixed() : null
     }

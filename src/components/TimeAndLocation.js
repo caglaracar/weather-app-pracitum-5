@@ -3,6 +3,8 @@ import {WeatherContext} from "../context/Context";
 import Clock from 'react-live-clock';
 
 const TimeAndLocation = () => {
+    // WeatherContext'ten city'yi alıyoruz
+
     const{city}=useContext(WeatherContext)
     return (
         <div className={"flex flex-col items-center justify-center "}>
