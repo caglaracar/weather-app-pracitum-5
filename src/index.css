@@ -25,6 +25,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+@media (max-width: 768px) {
+    .my-inner-container {
+        max-width: 100%!important;
+    }
+}
 
 
 .weather-chart {
