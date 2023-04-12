@@ -7,21 +7,28 @@ const Forecast = () => {
     const {forecast} = useContext(WeatherContext);
     const kelvin = 273.15;
 
+    // forecast değişkeni güncellendiğinde isLoading durumunu false olarak ayarlayan useEffect kullanıyoruz.
+
     useEffect(() => {
         setIsLoading(false);
     }, [forecast]);
+
+    // Verilen dizi öğelerinin en yüksek sıcaklığını hesaplar
 
     const calculateTempMax = (items) => {
         return items?.reduce((max, item) => {
             return item.main.temp_max > max ? item.main.temp_max : max;
         }, -Infinity);
     };
+// Verilen dizi öğelerinin en düşük sıcaklığını hesaplar
 
     const calculateTempMin = (items) => {
         return items?.reduce((min, item) => {
             return item.main.temp_min < min ? item.main.temp_min : min;
         }, Infinity);
     };
+    // Verilen sıcaklık değerini kelvin'den Celsius'a çevirir ve ondalık kısmı kaldırır
+
     const fixedFormat = (temp) => {
         return temp.toFixed() ? (temp - kelvin).toFixed() : null;
     };
