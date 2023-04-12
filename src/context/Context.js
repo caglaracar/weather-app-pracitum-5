@@ -44,8 +44,7 @@ const WeatherProvider = ({children}) => {
                     .then(data => {
                         const postcode = data.postcode;
                         console.log("Plaka Kodu: " + postcode.substring(0,2));
-                        setCity(cities[postcode.substring(0,2)-1])
-
+                        setCity(cities[postcode.startsWith(0)?postcode.substring(1,2)-1:postcode.substring(0,2)-1])
                     })
                     .catch(error => console.log(error));
             });
