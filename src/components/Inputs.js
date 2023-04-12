@@ -22,7 +22,7 @@ const Inputs = () => {
                 <UilLocationPoint
                     size={25}
                     className={"text-white cursor-pointer transition ease-out hover:scale-125 md:block hidden"}
-                    onClick={}
+                    // onClick={}
                 />
             </div>
         </div>
