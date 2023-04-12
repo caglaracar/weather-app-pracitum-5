@@ -1,6 +1,5 @@
 
-https://weather-app-pracitum-5-e59oflus2-caglaracar.vercel.app/
-
+https://weather-app-pracitum-5-lxcu.vercel.app/
 
 
 
