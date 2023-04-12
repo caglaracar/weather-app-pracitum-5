@@ -19,11 +19,33 @@ const WeatherProvider = ({children}) => {
 
     }, [city]);
     const handleCityChange = (event) => {
+        console.log(event.target.value)
         const cityIndex = event.target.value;
         setCity(cities[cityIndex]);
     }
+    const handleLocationButtonClick =  () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition (async(position) => {
+                const { latitude, longitude } = position.coords;
+
+
+               await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const postcode = data.postcode;
+                        console.log("Plaka Kodu: " + postcode.substring(0,2));
+                        setCity(cities[postcode.substring(0,2)-1])
+
+                    })
+                    .catch(error => console.log(error));
+            });
+        }
+        else {
+            alert("Konum bilginize erişmek laızm")
+        }
+    };
     return (
-        < WeatherContext.Provider value={{forecast, handleCityChange, setCity, city,cities}}>
+        < WeatherContext.Provider value={{forecast, handleCityChange, setCity, city,cities,handleLocationButtonClick}}>
             {children}
         </WeatherContext.Provider>
     );
