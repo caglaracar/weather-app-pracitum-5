@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 import cities from '../cities.json';
+
 export const WeatherContext = createContext()
 const WeatherProvider = ({children}) => {
 
@@ -17,8 +18,9 @@ const WeatherProvider = ({children}) => {
             const data = await response.json();
 
             setForecast(data);
-            console.log("datassss",data)
+            console.log("datassss", data)
         }
+
         fetchForecast();
 
     }, [city]);
@@ -29,34 +31,35 @@ const WeatherProvider = ({children}) => {
         const cityIndex = event.target.value;
         setCity(cities[cityIndex]);
     }
-    const handleLocationButtonClick =  () => {
+    const handleLocationButtonClick = () => {
 
         if (navigator.geolocation) {
             // Kullanıcının konum bilgisini almak için kullanılan fonksiyon
 
-            navigator.geolocation.getCurrentPosition (async(position) => {
-                const { latitude, longitude } = position.coords;
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const {latitude, longitude} = position.coords;
 
                 // Kullanıcının posta kodunu almak için kullanılan API
 
-               await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
+                await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`)
                     .then(response => response.json())
                     .then(data => {
                         const postcode = data.postcode;
-                        console.log("Plaka Kodu: " + postcode.substring(0,2));
-                        setCity(cities[postcode.startsWith(0)?postcode.substring(1,2)-1:postcode.substring(0,2)-1])
+                        const postCodeCity = postcode.startsWith(0) ? postcode.substring(1, 2) - 1 : postcode.substring(0, 2) - 1
+                        setCity(cities[postCodeCity])
+
                     })
                     .catch(error => console.log(error));
             });
-        }
-        else {
+        } else {
             alert("Konum bilginize erişmek laızm")
         }
     };
     // WeatherContext ile wrap edilen bileşenin döndürüldüğü kısım
 
     return (
-        < WeatherContext.Provider value={{forecast, handleCityChange, setCity, city,cities,handleLocationButtonClick}}>
+        < WeatherContext.Provider
+            value={{forecast, handleCityChange, setCity, city, cities, handleLocationButtonClick}}>
             {children}
         </WeatherContext.Provider>
     );
